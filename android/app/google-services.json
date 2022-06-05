@@ -7,6 +7,43 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:173018015260:android:0b36619f15fb21f01961d9",
+        "android_client_info": {
+          "package_name": "com.collegeproject.streetanimalrescue"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "173018015260-qfbvq1nkcj241on3pnvdpsi4s0bkp1ga.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.collegeproject.streetanimalrescue",
+            "certificate_hash": "f9fb6017d248a4aa94852128a6b583198957f557"
+          }
+        },
+        {
+          "client_id": "173018015260-e75s656jee6487g5p2lnjhdjdktji0ou.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEZzHZ-5CMgdTPFh_atxCHy2YtLiuCoOg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "173018015260-e75s656jee6487g5p2lnjhdjdktji0ou.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:173018015260:android:ca8984afbed9e3c81961d9",
         "android_client_info": {
           "package_name": "com.example.phone_login"

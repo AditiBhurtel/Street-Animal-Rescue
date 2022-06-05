@@ -1,4 +1,4 @@
-package com.example.phone_login
+package com.collegeproject.streetanimalrescue
 
 import io.flutter.embedding.android.FlutterActivity
 

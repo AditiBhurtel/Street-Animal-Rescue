@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'loginScreen.dart';
+import 'login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -25,7 +25,6 @@ class _HomeScreenState extends State<HomeScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset("images/welcome.jpg"),
-
           Container(
             margin: EdgeInsets.all(65),
             width: double.infinity,
@@ -33,16 +32,16 @@ class _HomeScreenState extends State<HomeScreen> {
               style: ElevatedButton.styleFrom(
                 primary: Colors.red,
               ),
-              onPressed: (){
+              onPressed: () {
                 FirebaseAuth.instance.signOut();
                 Navigator.of(context).push(MaterialPageRoute(builder: (c) => LoginScreen()));
-
               },
-              child: Text('Logout',style: TextStyle(color: Colors.white,fontSize: 16, fontWeight: FontWeight.bold),),
+              child: Text(
+                'Logout',
+                style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+              ),
             ),
           ),
-
-
         ],
       ),
     );
