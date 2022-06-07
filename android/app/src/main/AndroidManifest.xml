@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.phone_login">
+    package="com.collegeproject.streetanimalrescue">
    <application
-        android:label="phone_login"
+        android:label="Street Animal Rescue"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
