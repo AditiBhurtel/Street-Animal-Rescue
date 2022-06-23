@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:street_animal_rescue/view/screens/registration_page.dart';
 
 import 'home_screen.dart';
 
@@ -38,7 +39,7 @@ class _OtpPageState extends State<OtpPage> {
       verificationCompleted: (PhoneAuthCredential credential) async {
         await FirebaseAuth.instance.signInWithCredential(credential).then((value) {
           if (value.user != null) {
-            Navigator.of(context).push(MaterialPageRoute(builder: (c) => HomeScreen()));
+            Navigator.of(context).push(MaterialPageRoute(builder: (c) => Register()));
           }
         });
       },
@@ -117,7 +118,7 @@ class _OtpPageState extends State<OtpPage> {
                 try {
                   await FirebaseAuth.instance.signInWithCredential(PhoneAuthProvider.credential(verificationId: verificationCode!, smsCode: pin)).then((value) {
                     if (value.user != null) {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (c) => HomeScreen()));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (c) => Register()));
                     }
                   });
                 } catch (e) {

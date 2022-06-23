@@ -56,7 +56,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   initialSelection: "NP",
                   showCountryOnly: false,
                   showOnlyCountryWhenClosed: false,
-                  favorite: ["+977", "NP", "+1", "US"],
+                  favorite: ["+977", "NP"],
+                  enabled: false,
                 ),
               ),
               Container(
@@ -79,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                   ),
-                  maxLength: 12,
+                  maxLength: 10,
                   keyboardType: TextInputType.number,
                   controller: _controller,
                 ),
