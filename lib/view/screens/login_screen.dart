@@ -85,10 +85,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: _controller,
                 ),
               ),
-              Container(
-                margin: EdgeInsets.all(15),
-                width: double.infinity,
+
+                SizedBox(
+                  width: 200,
+                  height: 40,
                 child: ElevatedButton(
+                    style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  side: BorderSide(color: Colors.blueAccent),
+                ) ,
+              )
+        ),
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (c) => OtpPage(
