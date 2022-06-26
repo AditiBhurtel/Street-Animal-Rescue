@@ -1,8 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:street_animal_rescue/view/screens/OrganizationRegisterPage.dart';
+import 'package:street_animal_rescue/view/screens/home_screen.dart';
 import 'package:street_animal_rescue/view/screens/otp_page.dart';
 import 'package:street_animal_rescue/view/screens/registration_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'view/screens/login_screen.dart';
 
@@ -28,7 +31,9 @@ class MyApp extends StatelessWidget {
       home: LoginScreen(),
       routes: {
         '/login_screen' :(context)=>LoginScreen(),
-        '/registration_page' :(context)=>Register()
+        '/registration_page' :(context)=>Register(),
+        '/OrganizationRegisterPage' :(context)=>OrganizationRegister(),
+        '/home_screen' : (context)=>HomeScreen()
       },
     );
   }
