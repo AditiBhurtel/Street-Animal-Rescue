@@ -14,6 +14,7 @@ class _LoginScreenState extends State<LoginScreen> {
   String dialCodeDigits = "+977";
   TextEditingController _controller = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -99,11 +100,13 @@ class _LoginScreenState extends State<LoginScreen> {
               )
         ),
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (c) => OtpPage(
-                              phone: _controller.text,
-                              codeDigits: dialCodeDigits,
-                            )));
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (c) =>
+                              OtpPage(
+                                phone: _controller.text,
+                                codeDigits: dialCodeDigits,
+                              )));
+
                   },
                   child: Text(
                     'Next',

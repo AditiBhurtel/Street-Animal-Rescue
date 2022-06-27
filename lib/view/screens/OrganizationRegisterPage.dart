@@ -86,17 +86,14 @@ class _RegisterState extends State<OrganizationRegister>{
     )
     ),
     onPressed: (){
-    Navigator.of(context).push(MaterialPageRoute(
-    builder: (c) => HomeScreen()));
+
 
     if(_formkey.currentState!.validate())
     {
-    print("successful");
-
-    return;
-    }else{
-    print("UnSuccessful");
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (c) => HomeScreen()));
     }
+
     },
     child: Text("Register"),
 

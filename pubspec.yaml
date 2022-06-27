@@ -37,16 +37,6 @@ dependencies:
   modal_bottom_sheet: ^2.0.1
   email_validator: ^2.0.1
   validators: ^3.0.0
-  wave: ^0.2.2
-  cloud_firestore: ^3.1.18
-  firebase_storage: ^10.2.18
-  fluttertoast: ^8.0.9
-  image_picker: ^0.8.5+3
-
-  image_downloader: ^0.31.0
-  intl: ^0.17.0
-
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
