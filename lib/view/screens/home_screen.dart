@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+
 import 'login_screen.dart';
 
 
@@ -19,7 +20,12 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         title: Text(
           "Home Screen",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color:
+          Colors.white,
+
+
+          ),
+
         ),
       ),
       body: Column(
