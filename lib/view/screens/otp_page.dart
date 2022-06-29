@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:pinput/pin_put/pin_put.dart';
+import 'package:pinput/pinput.dart';
+import 'package:street_animal_rescue/view/screens/registration_page.dart';
 
 import 'home_screen.dart';
 
@@ -38,7 +39,7 @@ class _OtpPageState extends State<OtpPage> {
       verificationCompleted: (PhoneAuthCredential credential) async {
         await FirebaseAuth.instance.signInWithCredential(credential).then((value) {
           if (value.user != null) {
-            Navigator.of(context).push(MaterialPageRoute(builder: (c) => HomeScreen()));
+            Navigator.of(context).push(MaterialPageRoute(builder: (c) => Register()));
           }
         });
       },
@@ -63,7 +64,15 @@ class _OtpPageState extends State<OtpPage> {
       timeout: Duration(seconds: 60),
     );
   }
-
+ final defaultPinPutTheme =  PinTheme(
+   width: 56,
+   height: 56,
+   textStyle: TextStyle(fontSize: 20, color: Color.fromRGBO(30, 60, 87, 1), fontWeight: FontWeight.w600),
+   decoration: BoxDecoration(
+     border: Border.all(color: Color.fromRGBO(234, 239, 243, 1)),
+     borderRadius: BorderRadius.circular(20),
+   ),
+ );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,21 +103,22 @@ class _OtpPageState extends State<OtpPage> {
           ),
           Padding(
             padding: EdgeInsets.all(40.0),
-            child: PinPut(
-              fieldsCount: 6,
-              textStyle: TextStyle(fontSize: 25.0, color: Colors.white),
+            child: Pinput(
+              length: 6,
+              /*textStyle: TextStyle(fontSize: 25.0, color: Colors.white),
               eachFieldWidth: 40.0,
-              eachFieldHeight: 55.0,
+              eachFieldHeight: 55.0,*/
+              defaultPinTheme: defaultPinPutTheme,
               focusNode: _pinOTPCodeFocus,
               controller: _pinOTPCodeController,
-              submittedFieldDecoration: pinOTPCodeDecoration,
-              followingFieldDecoration: pinOTPCodeDecoration,
+              // submittedFieldDecoration: pinOTPCodeDecoration,
+              // followingFieldDecoration: pinOTPCodeDecoration,
               pinAnimationType: PinAnimationType.rotation,
-              onSubmit: (pin) async {
+              onCompleted: (pin) async {
                 try {
                   await FirebaseAuth.instance.signInWithCredential(PhoneAuthProvider.credential(verificationId: verificationCode!, smsCode: pin)).then((value) {
                     if (value.user != null) {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (c) => HomeScreen()));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (c) => Register()));
                     }
                   });
                 } catch (e) {
