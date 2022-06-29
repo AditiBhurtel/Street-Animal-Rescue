@@ -46,31 +46,6 @@ class _RegisterState extends State<Register>{
             key: _formkey,
             child: Column(
               children: [
-                const SizedBox(height: 12,),
-                //get-capture image
-                GestureDetector(
-                  onTap: ()
-                  {
-                    getImageFromGallery();
-                  },
-                  child: CircleAvatar(
-                    radius: MediaQuery.of(context).size.width * 0.20,
-                    backgroundColor: Colors.white,
-                    backgroundImage: imgXFile == null
-                        ? null
-                        :FileImage(
-                        File(imgXFile!.path)
-                    ),
-                    child: imgXFile == null ?
-                    Icon(
-                      Icons.add_photo_alternate,
-                      color: Colors.grey,
-                      size: MediaQuery.of(context).size.width * 0.20,
-                    ) : null,
-                  ),
-                ),
-
-                const SizedBox(height: 40,),
                 Padding(
                   padding: const EdgeInsets.only(bottom:15,left: 10,right: 10),
                   child: TextFormField(
