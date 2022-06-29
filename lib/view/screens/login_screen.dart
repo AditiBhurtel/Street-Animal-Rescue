@@ -37,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 margin: EdgeInsets.only(top: 10),
                 child: Center(
                   child: Text(
-                    "Phone (OTP) Authentication",
+                    "OTP Authentication",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                 ),
@@ -86,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: _controller,
                 ),
               ),
-
+              SizedBox(height: 30,),
                 SizedBox(
                   width: 200,
                   height: 40,
@@ -95,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
-                  side: BorderSide(color: Colors.blueAccent),
+                  side: BorderSide(color: Colors.transparent),
                 ) ,
               )
         ),
@@ -110,7 +110,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   child: Text(
                     'Next',
+
                     style: TextStyle(
+
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                 ),

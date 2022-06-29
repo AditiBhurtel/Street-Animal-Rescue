@@ -70,22 +70,30 @@ class _OtpPageState extends State<OtpPage> {
    textStyle: TextStyle(fontSize: 20, color: Color.fromRGBO(30, 60, 87, 1), fontWeight: FontWeight.w600),
    decoration: BoxDecoration(
      border: Border.all(color: Color.fromRGBO(234, 239, 243, 1)),
+
      borderRadius: BorderRadius.circular(20),
    ),
  );
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+      extendBodyBehindAppBar: true,
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text('OTP Verification'),
+        centerTitle: true,
+        title: Text('OTP Verification'
+
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset("images/otp.png"),
+            child: Image.asset("images/otp.jpg"),
           ),
           Container(
             margin: EdgeInsets.only(top: 20),
@@ -101,14 +109,16 @@ class _OtpPageState extends State<OtpPage> {
               ),
             ),
           ),
+
           Padding(
             padding: EdgeInsets.all(40.0),
             child: Pinput(
+
               length: 6,
               /*textStyle: TextStyle(fontSize: 25.0, color: Colors.white),
               eachFieldWidth: 40.0,
               eachFieldHeight: 55.0,*/
-              defaultPinTheme: defaultPinPutTheme,
+              //defaultPinTheme: defaultPinPutTheme,
               focusNode: _pinOTPCodeFocus,
               controller: _pinOTPCodeController,
               // submittedFieldDecoration: pinOTPCodeDecoration,
