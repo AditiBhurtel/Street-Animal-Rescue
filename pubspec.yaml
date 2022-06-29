@@ -37,6 +37,9 @@ dependencies:
   modal_bottom_sheet: ^2.0.1
   email_validator: ^2.0.1
   validators: ^3.0.0
+  curved_navigation_bar: ^1.0.3
+  material_color_generator: ^1.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
