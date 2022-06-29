@@ -25,8 +25,19 @@ class _RegisterState extends State<Register>{
     @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text('Registration'),),
+        centerTitle: true,
+        title: Text(
+            'Registration',
+          style: TextStyle(
+            color: Colors.teal.shade300
+          ),
+        ),
+
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
 
       body: Center
         (
@@ -34,10 +45,7 @@ class _RegisterState extends State<Register>{
           child: Form(
             key: _formkey,
             child: Column(
-
               children: [
-
-
                 Padding(
                   padding: const EdgeInsets.only(bottom:15,left: 10,right: 10),
                   child: TextFormField(
@@ -75,7 +83,9 @@ class _RegisterState extends State<Register>{
                     },
                   ),
                 ),
-
+                SizedBox(
+                  height: 60,
+                ),
                 SizedBox(
                   width: 200,
                   height: 40,
@@ -84,7 +94,7 @@ class _RegisterState extends State<Register>{
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
-                        side: BorderSide(color: Colors.blueAccent),
+                        side: BorderSide(color: Colors.transparent),
                       ) ,
                       )
                     ),
@@ -98,7 +108,11 @@ class _RegisterState extends State<Register>{
                       }
 
                     },
-                    child: Text("Register"),
+                    child: Text("Register",
+                      style: TextStyle(
+                        color: Colors.white
+                      )
+                    ),
 
                       )
                   ),
@@ -117,7 +131,7 @@ class _RegisterState extends State<Register>{
                         child: Text(
                           "Click Here",
                           style: TextStyle(
-                              color: Colors.blueAccent,
+                              color: Colors.teal[200],
                               fontWeight: FontWeight.bold,
                               fontSize: 15),
                         ),

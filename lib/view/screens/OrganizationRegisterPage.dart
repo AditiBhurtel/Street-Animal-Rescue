@@ -24,7 +24,15 @@ class _RegisterState extends State<OrganizationRegister>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Registration'),),
+      extendBodyBehindAppBar: true,
+        appBar: AppBar(centerTitle: true,
+          title: Text('Registration',
+              style: TextStyle(
+              color: Colors.teal.shade300
+          ),),
+        backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
     body: Center(
     child: SingleChildScrollView(
     child: Form(
@@ -72,7 +80,9 @@ class _RegisterState extends State<OrganizationRegister>{
     },
     ),
     ),
-
+    SizedBox(
+      height: 60,
+    ),
     SizedBox(
     width: 200,
     height: 40,
@@ -81,7 +91,7 @@ class _RegisterState extends State<OrganizationRegister>{
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30.0),
-      side: BorderSide(color: Colors.blueAccent),
+      side: BorderSide(color: Colors.transparent),
     ) ,
     )
     ),
@@ -95,7 +105,12 @@ class _RegisterState extends State<OrganizationRegister>{
     }
 
     },
-    child: Text("Register"),
+
+    child: Text(
+        "Register",
+        style: TextStyle(
+        color: Colors.white
+    )),
 
     )
     ),

@@ -7,21 +7,21 @@ InputDecoration buildInputDecoration(IconData icons,String hinttext) {
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(25.0),
       borderSide: BorderSide(
-          color: Colors.green,
+          color: Colors.teal.shade200,
           width: 1.5
       ),
     ),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(25.0),
       borderSide: BorderSide(
-        color: Colors.blue,
+        color: Colors.teal.shade200,
         width: 1.5,
       ),
     ),
     enabledBorder:OutlineInputBorder(
       borderRadius: BorderRadius.circular(25.0),
       borderSide: BorderSide(
-        color: Colors.blue,
+        color: Colors.grey,
         width: 1.5,
       ),
     ),
