@@ -19,7 +19,7 @@ class AuthCubit extends Cubit<AuthState> {
       final userModel = await _authRepo.registerUser(verificationCode: vId, smsCode: smsCode);
       if (userModel != null) {
         if (userModel.token != null) {
-          await sps.saveUserDetail(context: context, token: userModel.token!);
+          await sps.saveUserDetail(context: context, token: userModel.token!, passKey: userModel.password ?? '');
         }
       }
       emit(AuthState(userModel: userModel));
@@ -40,9 +40,9 @@ class AuthCubit extends Cubit<AuthState> {
       sPrint('token : $token');
 
       if (token != null) {
-        Map<String, dynamic> payload = Jwt.parseJwt(token);
+        Map<String, dynamic> payload = Jwt.parseJwt(token[0]);
         sPrint('jswt decoded: $payload');
-        final userModel = await _authRepo.loginWithToken(token: token, tokenDetails: payload);
+        final userModel = await _authRepo.loginWithToken(token: token[0], tokenDetails: payload, passKey: token[1]);
         emit(AuthState(userModel: userModel));
         BotToast.showText(text: 'Login successful.');
         BotToast.closeAllLoading();
@@ -52,7 +52,7 @@ class AuthCubit extends Cubit<AuthState> {
       }
     } catch (e) {
       sPrint('error in login :$e');
-      BotToast.showText(text: 'Error in login!');
+      // BotToast.showText(text: 'Error in login!');
       BotToast.closeAllLoading();
       emit(AuthState(userModel: state.userModel));
     }

@@ -115,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 10, right: 10, left: 10),
+                  margin: EdgeInsets.only(top: 10, right: 20, left: 20),
                   child: TextField(
                     decoration: InputDecoration(
                       hintText: "Enter your phone number",

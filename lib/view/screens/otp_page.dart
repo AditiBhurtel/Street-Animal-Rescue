@@ -130,6 +130,7 @@ class _OtpPageState extends State<OtpPage> {
                   eachFieldWidth: 40.0,
                   eachFieldHeight: 55.0,*/
                   //defaultPinTheme: defaultPinPutTheme,
+                  androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsRetrieverApi,
                   focusNode: _pinOTPCodeFocus,
                   controller: _pinOTPCodeController,
                   // submittedFieldDecoration: pinOTPCodeDecoration,
