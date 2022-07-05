@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   verifyPhoneNumber() async {
     sPrint('verification phone called : ${dialCodeDigits} , ${_controller.text}');
+    BotToast.showLoading();
     try {
       await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: "${dialCodeDigits + _controller.text}",
@@ -34,6 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
         },
         verificationFailed: (FirebaseAuthException e) {
           sPrint('verifif cati: ${e.message}');
+          BotToast.closeAllLoading();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(e.message.toString()),
@@ -43,11 +46,14 @@ class _LoginScreenState extends State<LoginScreen> {
         },
         codeSent: (String vID, int? resendToken) {
           sPrint('cocde sendg: $vID');
+          BotToast.closeAllLoading();
+          BotToast.showText(text: 'Opt code send successfully.');
           setState(() {
             // verificationCode = vID;
           });
         },
         codeAutoRetrievalTimeout: (String vID) {
+          BotToast.closeAllLoading();
           setState(() {
             // verificationCode = vID;
           });
@@ -55,6 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
         timeout: Duration(seconds: 120),
       );
     } catch (e) {
+      BotToast.closeAllLoading();
       sPrint('error in verification call: $e');
     }
   }
@@ -80,11 +87,11 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: 100,
+                  height: 50,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 28.0, right: 28.0),
-                  child: Image.asset("images/login.jpg"),
+                  child: Image.asset("images/login.png"),
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 10),

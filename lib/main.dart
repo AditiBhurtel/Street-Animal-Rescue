@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_color_generator/material_color_generator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:street_animal_rescue/cubit/auth_cubit.dart';
-import 'package:street_animal_rescue/view/screens/OrganizationRegisterPage.dart';
 import 'package:street_animal_rescue/view/screens/home_screen.dart';
+import 'package:street_animal_rescue/view/screens/organization_register.dart';
 import 'package:street_animal_rescue/view/screens/registration_page.dart';
 import 'package:street_animal_rescue/view/screens/splash_screen.dart';
 

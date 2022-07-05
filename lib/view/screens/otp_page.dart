@@ -36,6 +36,7 @@ class _OtpPageState extends State<OtpPage> {
 
   verifyPhoneNumber() async {
     sPrint('verification phone called : ${widget.codeDigits} , ${widget.phone}');
+    BotToast.showLoading();
     try {
       await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: "${widget.codeDigits + widget.phone}",
@@ -45,10 +46,12 @@ class _OtpPageState extends State<OtpPage> {
             Navigator.of(context).push(MaterialPageRoute(builder: (c) => Register()));
           }
         });*/
+          BotToast.closeAllLoading();
           sPrint('credential: $credential');
         },
         verificationFailed: (FirebaseAuthException e) {
           sPrint('verifif cati: ${e.message}');
+          BotToast.closeAllLoading();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(e.message.toString()),
@@ -58,11 +61,14 @@ class _OtpPageState extends State<OtpPage> {
         },
         codeSent: (String vID, int? resendToken) {
           sPrint('cocde sendg: $vID');
+          BotToast.closeAllLoading();
+          BotToast.showText(text: 'Opt code successfully sent.');
           setState(() {
             verificationCode = vID;
           });
         },
         codeAutoRetrievalTimeout: (String vID) {
+          BotToast.closeAllLoading();
           setState(() {
             verificationCode = vID;
           });
@@ -70,6 +76,7 @@ class _OtpPageState extends State<OtpPage> {
         timeout: Duration(seconds: 120),
       );
     } catch (e) {
+      BotToast.closeAllLoading();
       sPrint('error in verification call: $e');
     }
   }
@@ -130,7 +137,7 @@ class _OtpPageState extends State<OtpPage> {
                   eachFieldWidth: 40.0,
                   eachFieldHeight: 55.0,*/
                   //defaultPinTheme: defaultPinPutTheme,
-                  androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsRetrieverApi,
+                  androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsUserConsentApi,
                   focusNode: _pinOTPCodeFocus,
                   controller: _pinOTPCodeController,
                   // submittedFieldDecoration: pinOTPCodeDecoration,

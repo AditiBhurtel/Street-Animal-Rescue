@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:street_animal_rescue/enum/user_type_enum.dart';
 
 class UserModel {
   String? name;
@@ -36,9 +37,10 @@ class UserModel {
       uid: data['uid'],
       name: data['name'],
       email: data['email'],
+      password: data['password'],
       phoneNumber: data['phoneNumber'],
       image: data['image'],
-      userType: data['userType'],
+      userType: data['userType'] ?? UserTypeEnum.Individual.index,
       address: data['address'],
       isVerifiedUser: data['isVerifiedUser'],
       createdAt: data['createdAt'] != null ? (data['createdAt'] as Timestamp).toDate() : DateTime.now(),
@@ -55,7 +57,7 @@ class UserModel {
       'phoneNumber': phoneNumber,
       'image': image,
       'address': address,
-      'userType': userType,
+      'userType': userType ?? UserTypeEnum.Individual.index,
       'isVerifiedUser': isVerifiedUser,
       'createdAt': createdAt ?? DateTime.now(),
       'updatedAt': updatedAt ?? DateTime.now(),

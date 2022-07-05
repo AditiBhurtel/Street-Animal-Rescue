@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:street_animal_rescue/view/screens/home_screen.dart';
 
 import 'InputDeco_design.dart';
-import 'OrganizationRegisterPage.dart';
+import 'organization_register.dart';
 
 class Register extends StatefulWidget {
   @override

@@ -13,6 +13,6 @@ class EncryptDecryptServices {
   }
 
   String decryptData(String data) {
-    return getEncrypter().encrypt(data, iv: iv).base64;
+    return getEncrypter().decrypt64(data, iv: iv);
   }
 }
