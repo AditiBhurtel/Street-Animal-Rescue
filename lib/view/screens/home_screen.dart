@@ -108,6 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // await verifyPhoneNumber();
           },
           child: Icon(Icons.add_a_photo),
+          backgroundColor: Colors.red.shade300,
         ),
         bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(
