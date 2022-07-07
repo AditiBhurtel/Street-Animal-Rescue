@@ -9,6 +9,8 @@ import 'package:street_animal_rescue/repository/post_repository.dart';
 import 'package:street_animal_rescue/view/boarding_screen.dart';
 import 'package:street_animal_rescue/view/screens/urgent_rescue.dart';
 
+import 'SearchPage.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -122,7 +124,11 @@ class _HomeScreenState extends State<HomeScreen> {
             animationDuration: Duration(milliseconds: 300),
             index: index,
             items: items,
-            onTap: (index) => setState(() => this.index = index),
+    onTap: (index) {
+    if (index == 1)
+    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    return SearchPage();
+    }
           ),
         ),
       ),
