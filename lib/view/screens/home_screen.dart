@@ -1,10 +1,13 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:street_animal_rescue/cubit/auth_cubit.dart';
+import 'package:street_animal_rescue/modal/post_model.dart';
+import 'package:street_animal_rescue/repository/post_repository.dart';
 import 'package:street_animal_rescue/view/boarding_screen.dart';
-import 'package:street_animal_rescue/view/screens/UrgentRescue.dart';
+import 'package:street_animal_rescue/view/screens/urgent_rescue.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -58,7 +61,41 @@ class _HomeScreenState extends State<HomeScreen> {
                 ))
           ],
         ),
-        body: ListView.builder(itemCount: 12, itemBuilder: (context, index) => CardItem()),
+        body: StreamBuilder<List<PostModel>>(
+            stream: PostRepository().getAllStreamedPosts(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                BotToast.showLoading();
+              } else {
+                BotToast.closeAllLoading();
+              }
+              List<PostModel> postList = [];
+              if (snapshot.hasData) {
+                if (snapshot.data != null) {
+                  postList = snapshot.data ?? [];
+                }
+              }
+              if (postList.isEmpty) {
+                return Center(
+                  child: Text(
+                    'No post to show!',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 18,
+                    ),
+                  ),
+                );
+              }
+              return ListView.builder(
+                itemCount: postList.length,
+                itemBuilder: (context, index) {
+                  final pm = postList[index];
+                  return CardItem(
+                    postModel: pm,
+                  );
+                },
+              );
+            }),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
             Navigator.of(context).push(
@@ -95,8 +132,9 @@ class _HomeScreenState extends State<HomeScreen> {
 class CardItem extends StatelessWidget {
   const CardItem({
     Key? key,
+    required this.postModel,
   }) : super(key: key);
-
+  final PostModel postModel;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -113,17 +151,29 @@ class CardItem extends StatelessWidget {
                   ),
                 ),
               ),
-              title: Text("Aditi"),
+              title: Text(postModel.title),
               subtitle: Text("Tue July 01 2022"),
             ),
             Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                  image: NetworkImage('http://daily.jstor.org/wp-content/uploads/2022/06/how_street_dogs_spend_their_days_1050x700.jpg'),
-                  fit: BoxFit.cover,
-                )),
-              ),
+              child: postModel.image != null
+                  ? Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(postModel.image!),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    )
+                  : Container(
+                      color: Colors.teal.withOpacity(0.2),
+                      child: Center(
+                        child: Icon(
+                          Icons.image_not_supported_outlined,
+                          size: 30,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ),
             ),
             SizedBox(
               height: 14.0,

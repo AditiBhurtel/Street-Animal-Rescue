@@ -1,5 +1,8 @@
+import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:street_animal_rescue/view/screens/new_post_screen.dart';
 
 class UrgentRescue extends StatefulWidget {
   @override
@@ -7,8 +10,8 @@ class UrgentRescue extends StatefulWidget {
 }
 
 class _UrgentRescueState extends State<UrgentRescue> {
-  XFile? file;
   final ImagePicker _picker = ImagePicker();
+
   captureImageWithCamera() async {
     Navigator.pop(context);
     XFile? imageFile = await _picker.pickImage(
@@ -17,9 +20,17 @@ class _UrgentRescueState extends State<UrgentRescue> {
       maxWidth: 970,
     );
 
-    setState(() {
-      this.file = imageFile;
-    });
+    if (imageFile != null) {
+      Navigator.pop(context);
+      Navigator.push(
+        context,
+        CupertinoPageRoute(
+          builder: (ctx) => NewPostScreen(file: imageFile),
+        ),
+      );
+    } else {
+      BotToast.showText(text: 'Image is required.');
+    }
   }
 
   pickImageFromGallery() async {
@@ -29,9 +40,17 @@ class _UrgentRescueState extends State<UrgentRescue> {
       maxHeight: 680,
       maxWidth: 970,
     );
-    setState(() {
-      this.file = imageFile;
-    });
+    if (imageFile != null) {
+      Navigator.pop(context);
+      Navigator.push(
+        context,
+        CupertinoPageRoute(
+          builder: (ctx) => NewPostScreen(file: imageFile),
+        ),
+      );
+    } else {
+      BotToast.showText(text: 'Image is required.');
+    }
   }
 
   takeImage(mContext) {
@@ -77,7 +96,8 @@ class _UrgentRescueState extends State<UrgentRescue> {
     );
   }
 
-  displayUploadScreen() {
+  @override
+  Widget build(BuildContext context) {
     return Container(
       color: Theme.of(context).colorScheme.secondary.withOpacity(0.5),
       child: Column(
@@ -105,57 +125,5 @@ class _UrgentRescueState extends State<UrgentRescue> {
         ],
       ),
     );
-  }
-
-  removeImage() {
-    setState(() {
-      file = null;
-    });
-  }
-
-  displayUploadFormScreen() {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            ),
-            onPressed: removeImage),
-        title: Text(
-          "New Post",
-          style: TextStyle(fontSize: 18.0, color: Colors.black, fontWeight: FontWeight.bold),
-        ),
-        actions: <Widget>[
-          MaterialButton(
-            onPressed: () => {},
-            child: Text(
-              "Share",
-              style: TextStyle(color: Colors.teal, fontWeight: FontWeight.bold, fontSize: 16.0),
-            ),
-          )
-        ],
-      ),
-      body: ListView(
-        children: <Widget>[
-          Container(
-            height: 230.0,
-            width: MediaQuery.of(context).size.width * 0.8,
-            child: Center(
-              child: AspectRatio(
-                aspectRatio: 16 / 9,
-                child: Container(),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return file == null ? displayUploadScreen() : displayUploadFormScreen();
   }
 }

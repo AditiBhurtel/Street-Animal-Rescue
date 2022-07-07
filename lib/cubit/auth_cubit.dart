@@ -62,7 +62,8 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> registerOrganization({required String email, required String password, required String phoneNumber, required String address, required String organizationName, required BuildContext context}) async {
+  Future<void> registerOrganization(
+      {required String email, required String password, required String phoneNumber, required String address, required String organizationName, required BuildContext context}) async {
     BotToast.showLoading();
     try {
       await _authRepo.registerOrganization(
@@ -93,6 +94,7 @@ class AuthCubit extends Cubit<AuthState> {
         Map<String, dynamic> payload = Jwt.parseJwt(token[0]);
         sPrint('jswt decoded: $payload');
         if (Jwt.isExpired(token[0])) {
+          emit(AuthState());
           BotToast.showText(text: 'Session expired!');
           BotToast.closeAllLoading();
         } else {

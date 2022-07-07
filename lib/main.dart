@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_color_generator/material_color_generator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:street_animal_rescue/cubit/auth_cubit.dart';
+import 'package:street_animal_rescue/cubit/post_cubit.dart';
 import 'package:street_animal_rescue/view/screens/home_screen.dart';
 import 'package:street_animal_rescue/view/screens/organization_register.dart';
 import 'package:street_animal_rescue/view/screens/registration_page.dart';
@@ -41,6 +42,9 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (ctx) => AuthCubit(),
           ),
+          BlocProvider(
+            create: (ctx) => PostCubit(),
+          ),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -54,7 +58,12 @@ class MyApp extends StatelessWidget {
             return child;
           },
           navigatorObservers: [BotToastNavigatorObserver()],
-          routes: {'/login_screen': (context) => LoginScreen(), '/registration_page': (context) => Register(), '/OrganizationRegisterPage': (context) => OrganizationRegister(), '/home_screen': (context) => HomeScreen()},
+          routes: {
+            '/login_screen': (context) => LoginScreen(),
+            '/registration_page': (context) => Register(),
+            '/OrganizationRegisterPage': (context) => OrganizationRegister(),
+            '/home_screen': (context) => HomeScreen()
+          },
         ),
       ),
     );
