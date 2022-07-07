@@ -124,11 +124,12 @@ class _HomeScreenState extends State<HomeScreen> {
             animationDuration: Duration(milliseconds: 300),
             index: index,
             items: items,
-    onTap: (index) {
-    if (index == 1)
-    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-    return SearchPage();
-    }
+            onTap: (index) {
+              if (index == 1)
+                Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                  return SearchPage();
+                }));
+            },
           ),
         ),
       ),
