@@ -16,6 +16,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int index = 0;
 
+  var currentUser;
+
   @override
   Widget build(BuildContext context) {
     final items = <Widget>[
@@ -62,15 +64,21 @@ class _HomeScreenState extends State<HomeScreen> {
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
             Navigator.of(context).push(
-              MaterialPageRoute(
+              CupertinoPageRoute(
                 builder: (c) {
-                  return UrgentRescue();
+                  return UrgentRescue(
+                    gCurrentUser: currentUser,
+                  );
                 },
               ),
             );
             // await verifyPhoneNumber();
           },
-          child: Icon(Icons.add_a_photo),
+          child: Icon(
+            Icons.add_a_photo,
+            color: Colors.white,
+          ),
+          backgroundColor: Colors.red.shade300,
         ),
         bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(

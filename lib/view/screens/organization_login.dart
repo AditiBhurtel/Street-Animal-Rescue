@@ -70,7 +70,7 @@ class _OrganizationLoginState extends State<OrganizationLogin> {
                     ),
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 10,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 15, left: 10, right: 10),

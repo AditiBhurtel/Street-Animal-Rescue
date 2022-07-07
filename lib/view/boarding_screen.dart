@@ -9,6 +9,7 @@ class BoardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.teal,
       body: SafeArea(
         child: Container(
           color: Colors.white,

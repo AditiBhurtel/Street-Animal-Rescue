@@ -46,6 +46,7 @@ class AuthRepository {
         }
       });
       if (existedUserModel != null) {
+        userModel.url = existedUserModel.url;
         userModel.image = existedUserModel.image;
         userModel.email = existedUserModel.email;
         userModel.password = existedUserModel.password;

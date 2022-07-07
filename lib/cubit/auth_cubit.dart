@@ -1,10 +1,12 @@
 import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:street_animal_rescue/modal/user_model.dart';
 import 'package:street_animal_rescue/services/print_services.dart';
 import 'package:street_animal_rescue/services/shared_preferences_services.dart';
+import 'package:street_animal_rescue/view/boarding_screen.dart';
 
 import '../repository/auth_repository.dart';
 
@@ -95,6 +97,9 @@ class AuthCubit extends Cubit<AuthState> {
         if (Jwt.isExpired(token[0])) {
           BotToast.showText(text: 'Session expired!');
           BotToast.closeAllLoading();
+          Navigator.of(context).push(
+            CupertinoPageRoute(builder: (c) => BoardingScreen()),
+          );
         } else {
           final userModel = await _authRepo.loginWithToken(token: token[0], tokenDetails: payload, passKey: token[1]);
           emit(AuthState(userModel: userModel));

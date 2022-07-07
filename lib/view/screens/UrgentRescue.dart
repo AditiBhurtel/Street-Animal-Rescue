@@ -1,7 +1,16 @@
+import 'dart:io';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:street_animal_rescue/modal/user_model.dart';
 
 class UrgentRescue extends StatefulWidget {
+  final UserModel gCurrentUser;
+  UrgentRescue({required this.gCurrentUser});
+
   @override
   _UrgentRescueState createState() => _UrgentRescueState();
 }
@@ -9,6 +18,9 @@ class UrgentRescue extends StatefulWidget {
 class _UrgentRescueState extends State<UrgentRescue> {
   XFile? file;
   final ImagePicker _picker = ImagePicker();
+  TextEditingController descriptionTextEditingController = TextEditingController();
+  TextEditingController locationTextEditingController = TextEditingController();
+
   captureImageWithCamera() async {
     Navigator.pop(context);
     XFile? imageFile = await _picker.pickImage(
@@ -79,7 +91,7 @@ class _UrgentRescueState extends State<UrgentRescue> {
 
   displayUploadScreen() {
     return Container(
-      color: Theme.of(context).colorScheme.secondary.withOpacity(0.5),
+      color: Colors.white,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -113,6 +125,14 @@ class _UrgentRescueState extends State<UrgentRescue> {
     });
   }
 
+  getUserCurrentLocation() async {
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    List<Placemark> placeMarks = await placemarkFromCoordinates(position.latitude, position.longitude);
+    Placemark mPlaceMark = placeMarks[0];
+    String completeAddressInfo = '${mPlaceMark.subThoroughfare} ${mPlaceMark.thoroughfare}, ${mPlaceMark.subLocality} ${mPlaceMark.locality}, ${mPlaceMark.subAdministrativeArea} ${mPlaceMark.administrativeArea}, ${mPlaceMark.postalCode} ${mPlaceMark.country}, '; //to get
+    locationTextEditingController.text = completeAddressInfo;
+  }
+
   displayUploadFormScreen() {
     return Scaffold(
       appBar: AppBar(
@@ -129,7 +149,7 @@ class _UrgentRescueState extends State<UrgentRescue> {
         ),
         actions: <Widget>[
           MaterialButton(
-            onPressed: () => {},
+            onPressed: () => print("tapped"),
             child: Text(
               "Share",
               style: TextStyle(color: Colors.teal, fontWeight: FontWeight.bold, fontSize: 16.0),
@@ -145,10 +165,74 @@ class _UrgentRescueState extends State<UrgentRescue> {
             child: Center(
               child: AspectRatio(
                 aspectRatio: 16 / 9,
-                child: Container(),
+                child: Container(
+                  child: Image.file(
+                    File(file!.path),
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
             ),
           ),
+          Padding(
+            padding: EdgeInsets.only(top: 12.0),
+          ),
+          ListTile(
+            leading: CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(
+                widget.gCurrentUser.url!,
+              ),
+            ),
+            title: Container(
+              width: 250.0,
+              child: TextField(
+                style: TextStyle(color: Colors.black),
+                controller: descriptionTextEditingController,
+                decoration: InputDecoration(
+                  hintText: "Say something about the image",
+                  hintStyle: TextStyle(color: Colors.blue),
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+          ),
+          Divider(),
+          ListTile(
+            leading: Icon(
+              Icons.person_pin_circle,
+              color: Colors.blue,
+              size: 36.0,
+            ),
+            title: Container(
+              width: 250.0,
+              child: TextField(
+                style: TextStyle(color: Colors.black),
+                controller: locationTextEditingController,
+                decoration: InputDecoration(
+                  hintText: "Write the location here",
+                  hintStyle: TextStyle(color: Colors.blue),
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+          ),
+          Container(
+            width: 220.0,
+            height: 110.0,
+            alignment: Alignment.center,
+            child: ElevatedButton.icon(
+              icon: Icon(
+                Icons.location_on,
+                color: Colors.blue,
+              ),
+              label: Text(
+                "Get my Current Location",
+                style: TextStyle(color: Colors.blue),
+              ),
+              onPressed: getUserCurrentLocation,
+            ),
+          )
         ],
       ),
     );

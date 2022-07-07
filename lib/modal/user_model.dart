@@ -16,11 +16,14 @@ class UserModel {
   String? token;
   String? password;
 
+  String? url;
+
   UserModel({
     this.uid,
     this.name,
     this.email,
     this.phoneNumber,
+    this.url,
     this.image,
     this.address,
     this.createdAt,
@@ -40,6 +43,7 @@ class UserModel {
       password: data['password'],
       phoneNumber: data['phoneNumber'],
       image: data['image'],
+      url: data['url'],
       userType: data['userType'] ?? UserTypeEnum.Individual.index,
       address: data['address'],
       isVerifiedUser: data['isVerifiedUser'],
@@ -56,6 +60,7 @@ class UserModel {
       'email': email,
       'phoneNumber': phoneNumber,
       'image': image,
+      'url': url,
       'address': address,
       'userType': userType ?? UserTypeEnum.Individual.index,
       'isVerifiedUser': isVerifiedUser,

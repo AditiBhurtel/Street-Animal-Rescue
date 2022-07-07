@@ -1,6 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:street_animal_rescue/cubit/auth_cubit.dart';
@@ -72,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
       listener: (ctx, authState) {
         if (authState.userModel != null) {
           Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (c) => HomeScreen()),
+            CupertinoPageRoute(builder: (c) => HomeScreen()),
             (route) => false,
           );
         }
@@ -162,7 +163,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     )),
                     onPressed: () async {
                       Navigator.of(context).push(
-                        MaterialPageRoute(
+                        CupertinoPageRoute(
                           builder: (c) {
                             return OtpPage(
                               phone: _controller.text,
